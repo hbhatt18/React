@@ -1,36 +1,49 @@
-/*import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();*/
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 
-class Message extends React.Component{
-  render(){
-    return(
-      <div>
-        <h1 style={{color: this.props.color}}>{this.props.msg}</h1>
-        <p>I'll check back in {this.props.minutes} minutes</p>
-      </div>
-    )
-  }
+let skiData = {
+  total: 50,
+  powder:20,
+  backcoutry: 10,
+  goal:100
 }
 
-ReactDOM.render(<Message color="blue" msg="How are you?" minutes={51} />, document.getElementById('root'))
+const  SkiDayCounter = ({total, powder, backcoutry, goal}) => {
+  return(
+    <section>
+        <div>
+          <p>Total Days: {total}</p>
+        </div>
+        <div>
+          <p>Powder Days: {powder}</p>
+        </div>
+        <div>
+          <p>Backcountry Days: {backcoutry}</p>
+        </div>
+        <div>
+          <p>Goal Progress: {calGoalProgress(total,goal)}</p>
+        </div>
+      </section>
+  )
+}
+
+const getPercent =  decimal => {
+  return decimal * 100 + '%'
+}
+
+const calGoalProgress = (total, goal) => {
+  return getPercent(total/goal)
+}
+
+render(
+  <SkiDayCounter
+    total={skiData.total}
+    powder={skiData.powder}
+    backcoutry={skiData.backcoutry}
+    goal={skiData.goal} />,
+  document.getElementById('root')
+)
 
 serviceWorker.unregister()
