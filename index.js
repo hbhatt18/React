@@ -15,22 +15,33 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();*/
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 
-class Message extends React.Component{
-  render(){
-    return(
-      <div>
-        <h1 style={{color: this.props.color}}>{this.props.msg}</h1>
-        <p>I'll check back in {this.props.minutes} minutes</p>
-      </div>
-    )
-  }
+const Book = ({title, author, numberOfPages}) => {
+  return(
+    <section>
+      <h2>{title}</h2>
+      <p>By: {author}</p>
+      <p>Pages: {numberOfPages}</p>
+    </section>
+  )
+}
+const Library = () => {
+  return(
+  <div>
+    <Book title = "The sun rises" author="Earnest Hemmingway" numberOfPages={250}></Book>
+    <Book title = "White Teeth" author="Zadie Smith" numberOfPages={480}></Book>
+    <Book title = "Cat's Cradle" author="Kurt Vonnegut" numberOfPages={304}></Book>
+  </div>
+  )
 }
 
-ReactDOM.render(<Message color="blue" msg="How are you?" minutes={51} />, document.getElementById('root'))
+render(
+  <Library/>,
+  document.getElementById('root')
+)
 
 serviceWorker.unregister()
