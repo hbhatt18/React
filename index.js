@@ -15,24 +15,22 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();*/
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import * as serviceWorker from './serviceWorker'
 
-var style = {
-  backgroundColor: 'Orange',
-  color: 'white',
-  fontFamily: 'Arial'
-};
+class Message extends React.Component{
+  render(){
+    return(
+      <div>
+        <h1 style={{color: this.props.color}}>{this.props.msg}</h1>
+        <p>I'll check back in {this.props.minutes} minutes</p>
+      </div>
+    )
+  }
+}
 
+ReactDOM.render(<Message color="blue" msg="How are you?" minutes={51} />, document.getElementById('root'))
 
-ReactDOM.render(
-  <div style={style}>
-    <h1 id="heading-element">Hello World!</h1>
-    <p>We are glad you are here!</p>
-  </div>,
-  document.getElementById('root')
-);
-
-serviceWorker.unregister();
+serviceWorker.unregister()
