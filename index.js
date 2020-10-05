@@ -20,6 +20,12 @@ import { render } from 'react-dom'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 
+let bookList = [
+  {"title": "The sun rises", "author": "Earnest Hemmingway", "numberOfPages": 250},
+  {"title": "White Teeth", "author": "Zadie Smith", "numberOfPages": 480},
+  {"title": "Cat's Cradle", "author": "KurtVonnegut", "numberOfPages": 305}
+]
+
 const Book = ({title, author, numberOfPages}) => {
   return(
     <section>
@@ -29,18 +35,25 @@ const Book = ({title, author, numberOfPages}) => {
     </section>
   )
 }
-const Library = () => {
+
+const Library = ({books}) => {
   return(
-  <div>
-    <Book title = "The sun rises" author="Earnest Hemmingway" numberOfPages={250}></Book>
-    <Book title = "White Teeth" author="Zadie Smith" numberOfPages={480}></Book>
-    <Book title = "Cat's Cradle" author="Kurt Vonnegut" numberOfPages={304}></Book>
-  </div>
+    <div>
+      {books.map(
+        (book, i) => 
+              <Book
+                  key={i} 
+                  title={book.title}
+                  author={book.author}
+                  numberOfPages={book.numberOfPages}/>
+
+      )}
+    </div>
   )
 }
 
 render(
-  <Library/>,
+  <Library books={bookList}/>,
   document.getElementById('root')
 )
 
